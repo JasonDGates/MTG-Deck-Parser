@@ -1,88 +1,131 @@
-import React, { useState } from 'react';
+import React, { ChangeEvent, useState, useEffect } from 'react';
 
-const App = () => {
-  const [inputValue, setInputValue] = useState('');
-  const [selectedFile, setSelectedFile] = useState(null);
-  const [parsedData, setParsedData] = useState(null);
+interface AppProps {}
 
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
-  };
+interface Card {
+  id: string;
+  quantity: string;
+  sideboard: string;
+  image: string;
+}
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setSelectedFile(file);
+const App: React.FC<AppProps> = () => {
+  const [cardsArray, setCardsArray] = useState<Card[]>([]);
 
-    // Read the contents of the file
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (event) => {
-        const content = event.target.result;
-        parseXML(content);
-      };
-      reader.readAsText(file);
+  const handleFileChange = async (e: ChangeEvent<HTMLInputElement>) => {
+    const fileInput = e.target;
+    if (fileInput.files && fileInput.files.length > 0) {
+      const file = fileInput.files[0];
+      const fileContent = await readFile(file);
+      const parsedCardsArray = parseXml(fileContent);
+      setCardsArray(parsedCardsArray);
     }
   };
 
-  const parseXML = (xmlContent) => {
-    const parser = new DOMParser();
-    const xmlDoc = parser.parseFromString(xmlContent, 'text/xml');
-
-    const cardsArray = Array.from(xmlDoc.getElementsByTagName('Cards')).map((cardNode) => {
-      return {
-        id: cardNode.getAttribute('CatID'),
-        quantity: parseInt(cardNode.getAttribute('Quantity'), 10),
-        sideboard: cardNode.getAttribute('Sideboard') === 'true',
-      };
-    });
-
-    setParsedData(cardsArray);
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    // Add additional logic for form submission if needed
+    console.log(cardsArray);
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // Add your logic to handle the form submission with inputValue and parsedData
-    console.log('Submitted:', inputValue, parsedData);
+  useEffect(() => {
+    // Debounce the API calls by 100ms for each card
+    const debounceTimeouts: number[] = [];
+
+    cardsArray.forEach((card) => {
+      const timeoutId = setTimeout(async () => {
+        try {
+          const response = await fetch(`https://api.scryfall.com/cards/mtgo/${card.id}`);
+          const data = await response.json();
+
+          if (data.image_uris && data.image_uris.border_crop) {
+            const updatedCardsArray = cardsArray.map((c) =>
+              c.id === card.id ? { ...c, image: data.image_uris.border_crop } : c
+            );
+            setCardsArray(updatedCardsArray);
+          }
+        } catch (error) {
+          console.error(`Error fetching data for card ${card.id}:`, error);
+        }
+      }, 100);
+
+      debounceTimeouts.push(timeoutId);
+    });
+
+    // Clear timeouts on component unmount or when the cardsArray changes
+    return () => {
+      debounceTimeouts.forEach((timeoutId) => clearTimeout(timeoutId));
+    };
+  }, [cardsArray]);
+
+  const readFile = (file: File): Promise<string> => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onload = (event) => {
+        if (event.target?.result) {
+          resolve(event.target.result as string);
+        } else {
+          reject(new Error('Error reading file'));
+        }
+      };
+      reader.readAsText(file);
+    });
+  };
+
+  const parseXml = (xmlString: string): Card[] => {
+    const parser = new DOMParser();
+    const xmlDoc = parser.parseFromString(xmlString, 'text/xml');
+    const cardNodes = xmlDoc.querySelectorAll('Cards');
+
+    const parsedCardsArray: Card[] = [];
+
+    cardNodes.forEach((cardNode) => {
+      const card: Card = {
+        id: cardNode.getAttribute('CatID') || '',
+        quantity: cardNode.getAttribute('Quantity') || '',
+        sideboard: cardNode.getAttribute('Sideboard') || '',
+        image: '',
+      };
+
+      parsedCardsArray.push(card);
+    });
+
+    return parsedCardsArray;
   };
 
   return (
-    <div className="flex items-center justify-center h-screen">
-      <div className="bg-gray-200 p-8 rounded-lg w-1/2 h-4/5">
-        <form onSubmit={handleSubmit} className="flex flex-col h-full">
-          <label className="block mb-4 flex-grow">
-            Input:
-            <div className="relative">
-              <textarea
-                className="border border-gray-300 p-2 w-full h-full resize-none block"
-                placeholder="Enter something"
-                value={inputValue}
-                onChange={handleChange}
-              ></textarea>
-            </div>
-          </label>
-          <label className="block mb-4">
-            Upload File:
-            <input
-              type="file"
-              onChange={handleFileChange}
-              className="border border-gray-300 p-2 w-full"
-            />
-          </label>
-          {parsedData && (
-            <div className="mb-4">
-              <strong>Parsed Data:</strong>
-              <pre>{JSON.stringify(parsedData, null, 2)}</pre>
-            </div>
-          )}
-          <div>
-            <button
-              type="submit"
-              className="bg-blue-500 text-white p-2 rounded-md hover:bg-blue-600"
-            >
-              Submit
-            </button>
-          </div>
-        </form>
+    <div className="container mx-auto my-8 p-8 border rounded-md bg-gray-200">
+      <h1 className="text-2xl font-bold mb-4">File Upload App</h1>
+      <form encType="multipart/form-data" onSubmit={handleFormSubmit}>
+        <label htmlFor="fileInput" className="block mb-2">
+          Choose a file:
+        </label>
+        <input
+          type="file"
+          id="fileInput"
+          name="file"
+          accept=".xml"
+          className="mb-4"
+          onChange={handleFileChange}
+        />
+        <br />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Submit
+        </button>
+      </form>
+      {/* You can display the parsed data or any other relevant UI elements here */}
+      <div>
+        <h2 className="text-xl font-bold mb-2">Parsed Cards:</h2>
+        <ul>
+          {cardsArray.map((card, index) => (
+            <li key={index}>
+              ID: {card.id}, Quantity: {card.quantity}, Sideboard: {card.sideboard}, Image: {card.image}
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

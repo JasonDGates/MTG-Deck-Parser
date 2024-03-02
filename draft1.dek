@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deck xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <NetDeckID>0</NetDeckID>
+  <PreconstructedDeckID>0</PreconstructedDeckID>
+  <Cards CatID="29589" Quantity="1" Sideboard="true" Name="Woodfall Primus" Annotation="0" />
+  <Cards CatID="29591" Quantity="1" Sideboard="true" Name="Prismatic Omen" Annotation="0" />
+  <Cards CatID="30979" Quantity="1" Sideboard="true" Name="Tezzeret the Seeker" Annotation="0" />
+  <Cards CatID="38291" Quantity="1" Sideboard="true" Name="Darkslick Shores" Annotation="0" />
+  <Cards CatID="87559" Quantity="1" Sideboard="true" Name="Valki, God of Lies" Annotation="0" />
+  <Cards CatID="93536" Quantity="1" Sideboard="true" Name="Haunted Ridge" Annotation="0" />
+  <Cards CatID="91305" Quantity="1" Sideboard="true" Name="Deep Forest Hermit" Annotation="0" />
+  <Cards CatID="102524" Quantity="1" Sideboard="true" Name="Leyline Binding" Annotation="0" />
+  <Cards CatID="104422" Quantity="1" Sideboard="true" Name="Aetherflux Reservoir" Annotation="0" />
+  <Cards CatID="17047" Quantity="1" Sideboard="true" Name="Entomb" Annotation="0" />
+  <Cards CatID="28453" Quantity="1" Sideboard="true" Name="Garruk Wildspeaker" Annotation="0" />
+  <Cards CatID="9475" Quantity="1" Sideboard="true" Name="Lotus Petal" Annotation="0" />
+  <Cards CatID="116682" Quantity="1" Sideboard="true" Name="Gruff Triplets" Annotation="0" />
+  <Cards CatID="116828" Quantity="1" Sideboard="true" Name="Mosswood Dreadknight" Annotation="0" />
+  <Cards CatID="94812" Quantity="1" Sideboard="true" Name="Ulvenwald Oddity" Annotation="0" />
+  <Cards CatID="53181" Quantity="1" Sideboard="true" Name="Council's Judgment" Annotation="0" />
+  <Cards CatID="58239" Quantity="1" Sideboard="false" Name="Noble Hierarch" Annotation="0" />
+  <Cards CatID="7199" Quantity="2" Sideboard="false" Name="Plains" Annotation="0" />
+  <Cards CatID="107385" Quantity="1" Sideboard="false" Name="Sylvan Library" Annotation="0" />
+  <Cards CatID="36682" Quantity="1" Sideboard="false" Name="Oust" Annotation="0" />
+  <Cards CatID="43592" Quantity="1" Sideboard="false" Name="Karakas" Annotation="0" />
+  <Cards CatID="113168" Quantity="1" Sideboard="false" Name="Sail into the West" Annotation="0" />
+  <Cards CatID="7063" Quantity="4" Sideboard="false" Name="Island" Annotation="0" />
+  <Cards CatID="79270" Quantity="1" Sideboard="false" Name="Thassa's Oracle" Annotation="0" />
+  <Cards CatID="120405" Quantity="1" Sideboard="false" Name="Temple Garden" Annotation="0" />
+  <Cards CatID="26844" Quantity="1" Sideboard="false" Name="Tarmogoyf" Annotation="0" />
+  <Cards CatID="6995" Quantity="5" Sideboard="false" Name="Forest" Annotation="0" />
+  <Cards CatID="57880" Quantity="1" Sideboard="false" Name="Jace, Vryn's Prodigy" Annotation="0" />
+  <Cards CatID="99683" Quantity="1" Sideboard="false" Name="Green Sun's Zenith" Annotation="0" />
+  <Cards CatID="107243" Quantity="1" Sideboard="false" Name="Wrath of God" Annotation="0" />
+  <Cards CatID="18932" Quantity="1" Sideboard="false" Name="Brain Freeze" Annotation="0" />
+  <Cards CatID="28954" Quantity="1" Sideboard="false" Name="Scapeshift" Annotation="0" />
+  <Cards CatID="96994" Quantity="1" Sideboard="false" Name="Touch the Spirit Realm" Annotation="0" />
+  <Cards CatID="9895" Quantity="1" Sideboard="false" Name="Time Warp" Annotation="0" />
+  <Cards CatID="52987" Quantity="1" Sideboard="false" Name="Time Walk" Annotation="0" />
+  <Cards CatID="5389" Quantity="1" Sideboard="false" Name="Brainstorm" Annotation="0" />
+  <Cards CatID="24031" Quantity="1" Sideboard="false" Name="Simic Growth Chamber" Annotation="0" />
+  <Cards CatID="72870" Quantity="1" Sideboard="false" Name="Waterlogged Grove" Annotation="0" />
+  <Cards CatID="12547" Quantity="1" Sideboard="false" Name="Crop Rotation" Annotation="0" />
+  <Cards CatID="43620" Quantity="1" Sideboard="false" Name="Tropical Island" Annotation="0" />
+  <Cards CatID="65108" Quantity="1" Sideboard="false" Name="Chart a Course" Annotation="0" />
+  <Cards CatID="73237" Quantity="1" Sideboard="false" Name="Elvish Reclaimer" Annotation="0" />
+  <Cards CatID="74638" Quantity="1" Sideboard="false" Name="Recruiter of the Guard" Annotation="0" />
+  <Cards CatID="118256" Quantity="1" Sideboard="false" Name="Sentinel of the Nameless City" Annotation="0" />
+  <Cards CatID="97812" Quantity="1" Sideboard="false" Name="Shorikai, Genesis Engine" Annotation="0" />
+  <Cards CatID="72046" Quantity="1" Sideboard="false" Name="Tamiyo, Collector of Tales" Annotation="0" />
+  <Cards CatID="26700" Quantity="1" Sideboard="false" Name="Horizon Canopy" Annotation="0" />
+  <Cards CatID="106565" Quantity="1" Sideboard="false" Name="Nissa, Ascended Animist" Annotation="0" />
+</Deck>
